@@ -1,0 +1,14 @@
+{
+  "name": "白板",
+  "description": "一鍵把透明畫布變成不透明的白板 / 黑板底，底色繪於既有筆跡下方。可選白、黑或自訂顏色。",
+  "toggle": "白板",
+  "settings": {
+    "modeLabel": "模式",
+    "mode": {
+      "white": "白板",
+      "black": "黑板",
+      "custom": "自訂"
+    },
+    "customColor": "自訂顏色"
+  }
+}

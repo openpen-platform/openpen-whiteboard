@@ -1,0 +1,14 @@
+{
+  "name": "Whiteboard",
+  "description": "One-tap opaque whiteboard / blackboard backdrop drawn beneath existing strokes. White, black, or custom colour.",
+  "toggle": "Whiteboard",
+  "settings": {
+    "modeLabel": "Mode",
+    "mode": {
+      "white": "White",
+      "black": "Black",
+      "custom": "Custom"
+    },
+    "customColor": "Custom colour"
+  }
+}

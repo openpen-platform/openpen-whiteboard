@@ -1,0 +1,9 @@
+{
+  "id": "@openpen/whiteboard",
+  "name": "Whiteboard",
+  "version": "1.0.0",
+  "author": "OpenPen",
+  "description": "One-tap opaque whiteboard / blackboard backdrop drawn beneath existing strokes. White, black, or custom colour.",
+  "minAppVersion": "1.0.0",
+  "renderer": "dist/renderer.js"
+}
