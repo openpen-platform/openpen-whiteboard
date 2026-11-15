@@ -6,6 +6,12 @@ Covers the screen with an opaque white, black, or custom-colored backdrop,
 drawn beneath your strokes, so you can annotate on a blank board instead of on
 top of the screen.
 
+<p align="center">
+  <img src=".github/readme-demo.gif" alt="OpenPen Whiteboard: clicking the Whiteboard button turns a code editor into a blank white board, three boxes are drawn and connected, and turning the board off leaves the diagram over the code" width="800" />
+</p>
+
+<p align="center"><sub>Background: CodeMirror 6 with the One Dark theme (https://codemirror.net), MIT License (https://opensource.org/license/mit). The code is fictional.</sub></p>
+
 ## Install
 
 Requires OpenPen 1.0.0 or later.
