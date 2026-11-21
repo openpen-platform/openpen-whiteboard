@@ -1,9 +1,21 @@
 {
   "id": "@openpen/whiteboard",
   "name": "Whiteboard",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "OpenPen",
-  "description": "One-tap opaque whiteboard / blackboard backdrop drawn beneath existing strokes. White, black, or custom colour.",
+  "description": "Fills the screen in one tap with an opaque whiteboard or blackboard backdrop beneath existing strokes, in white, black or a custom colour.",
+  "descriptionLocalized": {
+    "zh-Hant": "一鍵鋪上不透明的白板或黑板底色，墊在既有筆跡下方；可選白、黑或自訂顏色。",
+    "zh-Hans": "一键铺上不透明的白板或黑板底色，垫在既有笔迹下方；可选白、黑或自定义颜色。"
+  },
+  "icon": ".github/marketplace/icon.png",
+  "screenshots": [
+    { "src": ".github/marketplace/cover.png", "alt": "Three boxes on a white board, the first two joined by a line." },
+    { "src": ".github/readme-demo.gif", "alt": "One tap covers a code editor with a whiteboard, then boxes and lines are drawn on it." }
+  ],
+  "changelog": [
+    "1.0.1: Marketplace icon, cover image and Traditional and Simplified Chinese descriptions."
+  ],
   "minAppVersion": "1.0.0",
   "renderer": "dist/renderer.js"
 }

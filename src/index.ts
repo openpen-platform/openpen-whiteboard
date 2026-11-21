@@ -52,7 +52,7 @@ function renderBackdrop(ctx: CanvasRenderingContext2D): void {
 
 export default defineModule({
   id: MODULE_ID,
-  version: '1.0.0',
+  version: '1.0.1',
   settingsSchema,
 
   setup(ctx) {

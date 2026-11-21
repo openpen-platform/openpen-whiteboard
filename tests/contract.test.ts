@@ -11,7 +11,7 @@ describe('defineModule contract', () => {
   it('declares the canonical id and version', () => {
     expect(whiteboard.id).toBe('@openpen/whiteboard')
     expect(MODULE_ID).toBe('@openpen/whiteboard')
-    expect(whiteboard.version).toBe('1.0.0')
+    expect(whiteboard.version).toBe('1.0.1')
   })
 
   it('contributes a backgroundLayer with a render fn', () => {

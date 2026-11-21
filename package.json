@@ -1,6 +1,6 @@
 {
   "name": "openpen-plugin-whiteboard",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Whiteboard / blackboard background for OpenPen.",
   "type": "module",
   "private": true,
