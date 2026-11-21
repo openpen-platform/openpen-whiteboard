@@ -23,14 +23,23 @@ vi.mock('@openpen/module-api/host', () => ({ emit: h.emit, on: vi.fn() }))
 vi.mock('@openpen/module-api/uikit', () => ({
   // Functional stubs that preserve the click / model-value contract the
   // components rely on, so the toggle / setMode handlers actually fire.
-  AppButton: {
-    name: 'AppButton',
-    emits: ['click'],
-    template: '<button @click="$emit(\'click\')"><slot /></button>',
+  AppButtonDropdown: {
+    name: 'AppButtonDropdown',
+    emits: ['main-click', 'caret-click'],
+    template:
+      `<div><button class="main" @click="$emit('main-click')" /><button class="caret" @click="$emit('caret-click')" /><slot name="popover-content" /></div>`,
   },
+  AppPopoverPanel: { template: '<div><slot /></div>' },
+  AppPopoverRow: { props: ['label'], template: '<div><slot /></div>' },
   AppSegmented: {
     name: 'AppSegmented',
     props: ['modelValue', 'options'],
+    emits: ['update:modelValue'],
+    template: '<div />',
+  },
+  AppSwatchPicker: {
+    name: 'AppSwatchPicker',
+    props: ['modelValue', 'colors'],
     emits: ['update:modelValue'],
     template: '<div />',
   },
@@ -40,10 +49,10 @@ vi.mock('@openpen/module-api', async (importOriginal) => {
   return { ...actual, useModuleContext: () => h.ctx }
 })
 
-import { AppSegmented } from '@openpen/module-api/uikit'
+import { AppSegmented, AppSwatchPicker } from '@openpen/module-api/uikit'
 import whiteboard from '../src/index'
 import ToggleButton from '../src/WhiteboardToggleButton.vue'
-import SettingsPanel from '../src/WhiteboardSettingsPanel.vue'
+import Options from '../src/WhiteboardOptions.vue'
 
 beforeEach(() => {
   emit.mockClear()
@@ -104,38 +113,50 @@ describe('setup() onSettingsChange emit (overlay window)', () => {
 describe('WhiteboardToggleButton does not emit', () => {
   it('writes updateSettings on toggle but never emits', async () => {
     const wrapper = mount(ToggleButton)
-    await wrapper.find('button').trigger('click')
+    await wrapper.find('button.main').trigger('click')
     await flushPromises()
 
     expect(updateSettings).toHaveBeenCalledTimes(1)
     expect(updateSettings).toHaveBeenCalledWith({ enabled: true })
     expect(emit).not.toHaveBeenCalled()
   })
+
+  it('opening the caret turns the backdrop on so edits are visible', async () => {
+    const wrapper = mount(ToggleButton)
+    await wrapper.find('button.caret').trigger('click')
+    await flushPromises()
+
+    expect(updateSettings).toHaveBeenCalledWith({ enabled: true })
+  })
 })
 
-describe('WhiteboardSettingsPanel does not emit', () => {
+describe('WhiteboardOptions (caret panel) does not emit', () => {
   it('writes updateSettings on setMode but never emits', async () => {
-    const wrapper = mount(SettingsPanel)
-    const seg = wrapper.findComponent(AppSegmented)
-    seg.vm.$emit('update:modelValue', 'black')
+    const wrapper = mount(Options)
+    wrapper.findComponent(AppSegmented).vm.$emit('update:modelValue', 'black')
     await flushPromises()
 
     expect(updateSettings).toHaveBeenCalledWith({ mode: 'black' })
     expect(emit).not.toHaveBeenCalled()
   })
 
-  it('writes updateSettings on setCustomColor but never emits', async () => {
-    ctx.getSettings = () => ({ enabled: false, mode: 'custom', customColor: '#1e1e1e' })
-    const wrapper = mount(SettingsPanel)
-    await flushPromises()
-    const input = wrapper.find('input[type="color"]')
-    expect(input.exists()).toBe(true)
-    ;(input.element as HTMLInputElement).value = '#abcdef'
-    await input.trigger('input')
+  it('picking a swatch writes only the colour, no emit', async () => {
+    const wrapper = mount(Options)
+    wrapper.findComponent(AppSwatchPicker).vm.$emit('update:modelValue', '#60A5FA')
     await flushPromises()
 
-    expect(updateSettings).toHaveBeenCalledWith({ customColor: '#abcdef' })
+    expect(updateSettings).toHaveBeenCalledWith({ customColor: '#60A5FA' })
     expect(emit).not.toHaveBeenCalled()
+  })
+
+  it('shows a pre-upgrade custom colour as the "current" swatch', async () => {
+    ctx.getSettings = () => ({ enabled: false, mode: 'custom', customColor: '#123456' })
+    const wrapper = mount(Options)
+    await flushPromises()
+    const colors = wrapper.findComponent(AppSwatchPicker).props('colors') as { value: string; testid: string }[]
+    const cur = colors.find((c) => c.testid === 'whiteboard-swatch-current')
+    expect(cur?.value).toBe('#123456')
+    expect(wrapper.findComponent(AppSwatchPicker).props('modelValue')).toBe('#123456')
     ctx.getSettings = () => ({ enabled: false, mode: 'white', customColor: '#1e1e1e' })
   })
 })

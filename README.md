@@ -40,19 +40,21 @@ npx openpen-cli plugin add .
    canvas stay.
 
 The backdrop is off until you turn it on, and the on/off state is saved with
-the other settings. Choose the backdrop color in the settings.
+the other settings. Pick the mode and color in the panel behind the small arrow next to the button.
 
-## Settings
+## Options
 
-Open OpenPen's settings and choose the **Whiteboard** panel.
+Click the small arrow next to the **Whiteboard** button to open the options
+panel (opening it also turns the backdrop on, so changes show at once). There
+is no section in the settings window.
 
-| Setting | Values | Default | Description |
+| Option | Values | Default | Description |
 | --- | --- | --- | --- |
 | **Mode** | `white`, `black`, `custom` | `white` | `white` is `#ffffff`, `black` is a soft black (`#1e1e1e`), `custom` uses the color below |
-| **Custom colour** | any color | `#2e7d32` | Backdrop color used when the mode is `custom`; shown only in that mode |
+| **Custom colour** | seven swatches | `#2e7d32` | Backdrop color used when the mode is `custom`; the swatch row is disabled in the other modes. The saved color that is not one of the swatches (the default green, or one chosen in an earlier version) shows as a first swatch labelled "Current custom colour" |
 
 The on/off state is also stored as a setting (`enabled`, default off). It is
-changed with the control bar button rather than in the settings panel.
+changed with the control bar button.
 
 ## License
 

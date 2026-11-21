@@ -6,8 +6,8 @@
  *     The host calls `render(ctx)` during `redrawAllInternal` BEFORE strokes are
  *     painted, so the fill lands beneath existing ink (Epic Pen semantics:
  *     toggling the backdrop never wipes strokes).
- *   - A toggle button in the control bar 'tools' group.
- *   - A settings panel (mode + custom colour) for `ui.settings.panels`.
+ *   - A toggle button in the control bar 'tools' group, with a caret that opens a
+ *     panel for the mode and the custom colour (no settings-page section).
  *
  * `enabled` / `mode` / `customColor` are config (not transient state), so they
  * live in a module-scoped holder hydrated from settings in setup(); the layer
@@ -26,7 +26,6 @@ export { MODULE_ID } from './module-id'
 import { MODULE_ID } from './module-id'
 import { resolveBackdropColor, type WhiteboardSettings } from './backdrop'
 import WhiteboardToggleButton from './WhiteboardToggleButton.vue'
-import WhiteboardSettingsPanel from './WhiteboardSettingsPanel.vue'
 import en from './locales/en.json'
 import zhHant from './locales/zh-Hant.json'
 import zhHans from './locales/zh-Hans.json'
@@ -85,18 +84,6 @@ export default defineModule({
         component: WhiteboardToggleButton,
         defaultGroup: 'tools',
         groupHint: { separator: 'auto' },
-      },
-    ],
-    settingsPanels: [
-      {
-        id: 'whiteboard-settings',
-        label: {
-          en: 'Whiteboard',
-          'zh-Hant': '白板',
-          'zh-Hans': '白板',
-          ja: 'ホワイトボード',
-        },
-        component: WhiteboardSettingsPanel,
       },
     ],
     locales: {

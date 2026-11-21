@@ -3,7 +3,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 
 vi.mock('@openpen/module-api/host', () => ({ emit: vi.fn(), on: vi.fn() }))
-vi.mock('@openpen/module-api/uikit', () => ({ AppButton: {}, AppSegmented: {} }))
+vi.mock('@openpen/module-api/uikit', () => ({ AppButton: {}, AppButtonDropdown: {}, AppPopoverPanel: {}, AppPopoverRow: {}, AppSwatchPicker: {}, AppSegmented: {} }))
 
 import whiteboard, { MODULE_ID } from '../src/index'
 
@@ -20,11 +20,10 @@ describe('defineModule contract', () => {
     expect(typeof layers[0].render).toBe('function')
   })
 
-  it('contributes a control bar button and a settings panel', () => {
+  it('contributes a control bar button and no settings-page panel (options live in the caret panel)', () => {
     expect(whiteboard.contributes!.controlBar!).toHaveLength(1)
     expect(whiteboard.contributes!.controlBar![0].defaultGroup).toBe('tools')
-    expect(whiteboard.contributes!.settingsPanels!).toHaveLength(1)
-    expect(whiteboard.contributes!.settingsPanels![0].component).toBeTruthy()
+    expect(whiteboard.contributes!.settingsPanels).toBeUndefined()
   })
 
   it('settingsSchema parses defaults: enabled/mode/customColor', () => {

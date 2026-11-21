@@ -10,5 +10,18 @@
       "custom": "Custom"
     },
     "customColor": "Custom colour"
+  },
+  "options": {
+    "label": "Whiteboard options"
+  },
+  "colors": {
+    "f87171": "Red",
+    "fb923c": "Orange",
+    "fbbf24": "Yellow",
+    "34d399": "Green",
+    "60a5fa": "Blue",
+    "818cf8": "Indigo",
+    "f472b6": "Pink",
+    "current": "Current custom colour"
   }
 }

@@ -31,3 +31,37 @@ export function resolveBackdropColor(mode: WhiteboardMode, customColor: string):
       return customColor
   }
 }
+
+/** Default custom backdrop colour (a chalkboard green). */
+export const CUSTOM_DEFAULT = '#2e7d32'
+
+/** One-click custom colours offered by the control-bar panel (the control bar's pen palette, minus white). */
+export const COLOR_PRESETS: readonly string[] = [
+  '#F87171',
+  '#FB923C',
+  '#FBBF24',
+  '#34D399',
+  '#60A5FA',
+  '#818CF8',
+  '#F472B6',
+]
+
+export interface Swatch {
+  value: string
+  /** Preset hex without `#` (used for label/testid keys), or `current` for a colour that is not a preset. */
+  key: string
+}
+
+/**
+ * Swatches for the panel: the presets, preceded by the saved custom colour as
+ * one "current" swatch when it is not a preset (a pre-upgrade colour, or the
+ * default chalkboard green), so the panel always shows the stored value.
+ */
+export function buildSwatches(customColor: string): Swatch[] {
+  const list: Swatch[] = COLOR_PRESETS.map((hex) => ({ value: hex, key: hex.slice(1).toLowerCase() }))
+  const saved = typeof customColor === 'string' && customColor.trim() ? customColor : CUSTOM_DEFAULT
+  if (!COLOR_PRESETS.some((hex) => hex.toLowerCase() === saved.toLowerCase())) {
+    list.unshift({ value: saved, key: 'current' })
+  }
+  return list
+}

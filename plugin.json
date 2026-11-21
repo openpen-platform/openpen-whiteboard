@@ -16,6 +16,6 @@
   "changelog": [
     "1.0.1: Marketplace icon, cover image and Traditional and Simplified Chinese descriptions."
   ],
-  "minAppVersion": "1.0.0",
+  "minAppVersion": "1.6.0",
   "renderer": "dist/renderer.js"
 }

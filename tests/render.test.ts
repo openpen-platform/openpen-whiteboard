@@ -5,7 +5,7 @@ import type { ModuleSetupContext } from '@openpen/module-api'
 // uikit at module-eval time. Neither is exercised by the render path, so stub
 // them to keep this test focused on the canvas background layer.
 vi.mock('@openpen/module-api/host', () => ({ emit: vi.fn(), on: vi.fn() }))
-vi.mock('@openpen/module-api/uikit', () => ({ AppButton: {}, AppSegmented: {} }))
+vi.mock('@openpen/module-api/uikit', () => ({ AppButton: {}, AppButtonDropdown: {}, AppPopoverPanel: {}, AppPopoverRow: {}, AppSwatchPicker: {}, AppSegmented: {} }))
 
 import whiteboard from '../src/index'
 import { resolveBackdropColor } from '../src/backdrop'
